@@ -12,8 +12,6 @@ public class Animal : MonoBehaviour
 
     [SerializeField] float speed;
     [SerializeField] int life;
-    [SerializeField] Slider VidaSlider;
-    public float DañoDeBullet;
     Vector3 targetPosition;
     Vector3 towardsTarget;
     float wanderRadius = 2f;
@@ -70,16 +68,6 @@ public class Animal : MonoBehaviour
         */
         myBody.velocity = new Vector2(speed,myBody.velocity.y);
 
-        
-    }
-    //Barra de vida
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Bullet")
-        {
-            VidaSlider.value -= DañoDeBullet;   
-            Destroy(collision.gameObject);
-        }
         
     }
 
