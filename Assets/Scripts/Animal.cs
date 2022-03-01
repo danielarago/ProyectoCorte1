@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Animal : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class Animal : MonoBehaviour
 
     [SerializeField] float speed;
     [SerializeField] int life;
+    public Slider Vida;
+    public float DañoDeBullet;
+
 
     // Start is called before the first frame update
     void Start()
@@ -46,6 +50,15 @@ public class Animal : MonoBehaviour
         positivo al límite de x de la pantalla.
         */
         myBody.velocity = new Vector2(speed,myBody.velocity.y);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Bullet")
+        {
+            Vida.value -= DañoDeBullet;
+            Destroy(collision.gameObject);
+        }
     }
 
     public void TakeNormalShot()
