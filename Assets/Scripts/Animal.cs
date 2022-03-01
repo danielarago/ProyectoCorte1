@@ -12,7 +12,7 @@ public class Animal : MonoBehaviour
 
     [SerializeField] float speed;
     [SerializeField] int life;
-    public Slider Vida;
+    [SerializeField] Slider VidaSlider;
     public float DañoDeBullet;
     Vector3 targetPosition;
     Vector3 towardsTarget;
@@ -56,6 +56,8 @@ public class Animal : MonoBehaviour
             RecalculteTargetPosition();
 
         transform.position += towardsTarget.normalized * speed * Time.deltaTime;
+
+        
     }
 
     private void FixedUpdate() {
@@ -70,16 +72,17 @@ public class Animal : MonoBehaviour
 
         
     }
-
+    //Barra de vida
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Bullet")
         {
-            Vida.value -= DañoDeBullet;
+            VidaSlider.value -= DañoDeBullet;   
             Destroy(collision.gameObject);
         }
         
     }
+
 
     public void TakeNormalShot()
     {
