@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6840362435445881301}
   - component: {fileID: 846197311418152158}
   - component: {fileID: 8305569280904107994}
-  m_Layer: 9
+  m_Layer: 6
   m_Name: horse
   m_TagString: Enemy
   m_Icon: {fileID: 0}
