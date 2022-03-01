@@ -37,4 +37,9 @@ public class Animal : MonoBehaviour
     {
         life--;
     }
+
+    public int GetLife()
+    {
+        return life;
+    }
 }

@@ -22,6 +22,10 @@ public class Bullet : MonoBehaviour
         GameObject collidedObject = collision.gameObject;
         if (collision.gameObject.tag == "Enemy") {
             collidedObject.GetComponent<Animal>().TakeNormalShot();
+            if (collidedObject.GetComponent<Animal>().GetLife() == 0)
+            {
+                Destroy(collidedObject);
+            }
         }
         else
         {
