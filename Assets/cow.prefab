@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2236028883848270080}
   - component: {fileID: 5356023437051517963}
   - component: {fileID: 3650570234907655951}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: cow
   m_TagString: Enemy
   m_Icon: {fileID: 0}
