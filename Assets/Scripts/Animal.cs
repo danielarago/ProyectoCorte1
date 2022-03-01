@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
+
 
 public class Animal : MonoBehaviour
 {
@@ -16,8 +16,9 @@ public class Animal : MonoBehaviour
     public float DañoDeBullet;
     Vector3 targetPosition;
     Vector3 towardsTarget;
-    float wanderRadius = 3f;
-
+    float wanderRadius = 2f;
+    
+    
     void RecalculteTargetPosition ()
     {
         targetPosition = transform.position + Random.insideUnitSphere * wanderRadius;
@@ -44,9 +45,6 @@ public class Animal : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float movH = Input.GetAxis("Horizontal");
-        float movV = Input.GetAxis("Vertical");
-
 
         transform.position = new Vector3(
                Mathf.Clamp(transform.position.x, minX, maxX),
@@ -54,7 +52,7 @@ public class Animal : MonoBehaviour
            );
 
         towardsTarget = targetPosition - transform.position;
-        if (towardsTarget.magnitude < 0.50f)
+        if (towardsTarget.magnitude < 2f)
             RecalculteTargetPosition();
 
         transform.position += towardsTarget.normalized * speed * Time.deltaTime;
@@ -69,6 +67,8 @@ public class Animal : MonoBehaviour
         positivo al límite de x de la pantalla.
         */
         myBody.velocity = new Vector2(speed,myBody.velocity.y);
+
+        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -78,6 +78,7 @@ public class Animal : MonoBehaviour
             Vida.value -= DañoDeBullet;
             Destroy(collision.gameObject);
         }
+        
     }
 
     public void TakeNormalShot()
