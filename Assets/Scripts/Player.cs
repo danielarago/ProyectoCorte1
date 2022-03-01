@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     [SerializeField] float fireRate;
     private float allowFire;
     private GameObject instanceBullet;
+    private bool specialShot = false;
 
 
     // Start is called before the first frame update
@@ -73,9 +74,18 @@ public class Player : MonoBehaviour
 
         if (instanceBullet.GetComponent<Bullet>().GetHasBeenHit() == true)
         {
-            Destroy(instanceBullet);
+            DestroyBullet();
         }
     }
 
+    private void DestroyBullet()
+    {
+        Destroy(instanceBullet);
+    }
+
+    public void ChangeShot()
+    {
+        specialShot = !specialShot;
+    }
 
 }

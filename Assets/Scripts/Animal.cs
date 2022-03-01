@@ -19,7 +19,7 @@ public class Animal : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-     
+
     }
 
     private void FixedUpdate() {
@@ -31,11 +31,10 @@ public class Animal : MonoBehaviour
         positivo al límite de x de la pantalla.
         */
         myBody.velocity = new Vector2(speed,myBody.velocity.y);
-
     }
 
-    private void deleteAnimal()
+    public void TakeNormalShot()
     {
-
+        life--;
     }
 }

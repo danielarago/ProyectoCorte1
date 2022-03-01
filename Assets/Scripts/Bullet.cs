@@ -19,9 +19,9 @@ public class Bullet : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D collision){
-        Debug.Log("Colisionando con " + collision.gameObject.name);
+        GameObject collidedObject = collision.gameObject;
         if (collision.gameObject.tag == "Enemy") {
-            
+            collidedObject.GetComponent<Animal>().TakeNormalShot();
         }
         else
         {
