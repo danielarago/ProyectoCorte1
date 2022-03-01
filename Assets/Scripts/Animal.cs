@@ -6,6 +6,7 @@ public class Animal : MonoBehaviour
 {
     // Recuperamos el rigidbody del animal.
     Rigidbody2D myBody;
+    float minX, maxX, maxY, minY;
 
     [SerializeField] float speed;
     [SerializeField] int life;
@@ -14,12 +15,26 @@ public class Animal : MonoBehaviour
     void Start()
     {
         myBody = GetComponent<Rigidbody2D>();
+
+        Vector2 esqInfI = Camera.main.ViewportToWorldPoint(new Vector3(0, 0));
+        minX = esqInfI.x;
+        minY = esqInfI.y;
+
+        Vector2 esqSupD = Camera.main.ViewportToWorldPoint(new Vector3(1, 1));
+        maxX = esqSupD.x;
+        maxY = esqSupD.y;
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        transform.position = new Vector3(
+               Mathf.Clamp(transform.position.x, minX, maxX),
+               Mathf.Clamp(transform.position.y, minY, maxY)
+           );
 
+        
     }
 
     private void FixedUpdate() {
