@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] GameObject bullet;
     float minX, maxX, maxY, minY;
+    [SerializeField] float fireRate;
+    private float allowFire;
 
 
     // Start is called before the first frame update
@@ -30,7 +32,7 @@ public class Player : MonoBehaviour
     {
         /*if(Input.GetKey(KeyCode.RightArrow))
             transform.Translate(new Vector2(0.1f, 0));
-        */    
+        */
 
         /* 
         Get Axis es de acuerdo con Project Settings > Input Manager, da valores entre -1 y 1 
@@ -55,15 +57,19 @@ public class Player : MonoBehaviour
         es 0,0 y la esquina superior derecha es 1,1. 
         Clamp se asegura que los valores se encuentre entre los máximos y mínimos establecidos
         más arribas.
-        */    
+        */
         transform.position = new Vector2(
             Mathf.Clamp(transform.position.x, minX, maxX),
             Mathf.Clamp(transform.position.y, minY, maxY)
         );
 
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            Instantiate(bullet, transform.position, transform.rotation);
+        if (Input.GetKeyDown(KeyCode.Space) && (Time.time > allowFire)) { 
+            {
+                Instantiate(bullet, transform.position, transform.rotation);
+                allowFire = Time.time + fireRate;
+            }
         }
     }
+
+
 }

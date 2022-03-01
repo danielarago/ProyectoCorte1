@@ -8,6 +8,7 @@ public class Animal : MonoBehaviour
     Rigidbody2D myBody;
 
     [SerializeField] float speed;
+    [SerializeField] int life;
 
     // Start is called before the first frame update
     void Start()
