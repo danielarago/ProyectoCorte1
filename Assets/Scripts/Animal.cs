@@ -33,4 +33,9 @@ public class Animal : MonoBehaviour
         myBody.velocity = new Vector2(speed,myBody.velocity.y);
 
     }
+
+    private void deleteAnimal()
+    {
+
+    }
 }

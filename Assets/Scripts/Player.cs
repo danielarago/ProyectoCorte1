@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     float minX, maxX, maxY, minY;
     [SerializeField] float fireRate;
     private float allowFire;
+    private GameObject instanceBullet;
 
 
     // Start is called before the first frame update
@@ -65,9 +66,14 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && (Time.time > allowFire)) { 
             {
-                Instantiate(bullet, transform.position, transform.rotation);
+                instanceBullet = Instantiate(bullet, transform.position, transform.rotation);
                 allowFire = Time.time + fireRate;
             }
+        }
+
+        if (instanceBullet.GetComponent<Bullet>().GetHasBeenHit() == true)
+        {
+            Destroy(instanceBullet);
         }
     }
 

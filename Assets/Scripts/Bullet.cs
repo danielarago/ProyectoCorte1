@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    private bool hasBeenHit=false;
 
     // Start is called before the first frame update
     void Start()
@@ -19,8 +20,17 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision){
         Debug.Log("Colisionando con " + collision.gameObject.name);
-        /*if (collision.gameObject.tag == "Enemy") {
+        if (collision.gameObject.tag == "Enemy") {
+            
+        }
+        else
+        {
+            hasBeenHit = true;
+        }
+    }
 
-        }*/
+    public bool GetHasBeenHit()
+    {
+        return this.hasBeenHit;
     }
 }
