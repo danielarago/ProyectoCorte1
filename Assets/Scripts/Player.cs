@@ -88,4 +88,9 @@ public class Player : MonoBehaviour
         specialShot = !specialShot;
     }
 
+    public bool GetSpecialShot()
+    {
+        return specialShot;
+    }
+
 }
