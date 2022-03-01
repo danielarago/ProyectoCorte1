@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class Animal : MonoBehaviour
 {
@@ -13,11 +14,21 @@ public class Animal : MonoBehaviour
     [SerializeField] int life;
     public Slider Vida;
     public float DañoDeBullet;
+    Vector3 targetPosition;
+    Vector3 towardsTarget;
+    float wanderRadius = 3f;
 
+    void RecalculteTargetPosition ()
+    {
+        targetPosition = transform.position + Random.insideUnitSphere * wanderRadius;
+        targetPosition.y = 0;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
+        RecalculteTargetPosition ();
+
         myBody = GetComponent<Rigidbody2D>();
 
         Vector2 esqInfI = Camera.main.ViewportToWorldPoint(new Vector3(0, 0));
@@ -33,12 +44,20 @@ public class Animal : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float movH = Input.GetAxis("Horizontal");
+        float movV = Input.GetAxis("Vertical");
+
+
         transform.position = new Vector3(
                Mathf.Clamp(transform.position.x, minX, maxX),
                Mathf.Clamp(transform.position.y, minY, maxY)
            );
 
-        
+        towardsTarget = targetPosition - transform.position;
+        if (towardsTarget.magnitude < 0.50f)
+            RecalculteTargetPosition();
+
+        transform.position += towardsTarget.normalized * speed * Time.deltaTime;
     }
 
     private void FixedUpdate() {
