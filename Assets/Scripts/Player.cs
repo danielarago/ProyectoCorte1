@@ -70,6 +70,17 @@ public class Player : MonoBehaviour
             Mathf.Clamp(transform.position.y, minY, maxY)
         );
 
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            startPress = Time.time;
+        }
+
+        if ((Input.GetKeyUp(KeyCode.Space)))
+        {
+            endPress = Time.time - startPress;
+            Debug.Log("Tiempo" + endPress.ToString());
+        }
+
         if (specialShot == false)
         {
             if (Input.GetKeyDown(KeyCode.Space) && (Time.time > allowFire))
@@ -79,12 +90,7 @@ public class Player : MonoBehaviour
             }
         } else if (specialShot == true)
         {
-            while (Input.GetKey(KeyCode.Space))
-            {
-                endPress = 0 + Time.deltaTime;
-                Debug.Log("Tiempo presionado de tecla" + endPress.ToString());
-            }
-            if (Input.GetKeyDown(KeyCode.Space) && endPress > timeForSpecialShot) {
+            if (Input.GetKeyUp(KeyCode.Space) && endPress > timeForSpecialShot) {
                 instanceSpecialBullet = Instantiate(specialBullet, transform.position, transform.rotation);
             }
       
@@ -112,23 +118,5 @@ public class Player : MonoBehaviour
             Debug.Log("Shot has been changed");
         }
     }
-
-    /* private float timeKeyPress()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            startPress = Time.time;
-        }
-
-        if ((Input.GetKeyUp(KeyCode.Space)))
-        {
-            endPress = Time.time - startPress;
-        }
-        
-
-        Debug.Log("Tiempo presionado de tecla" + endPress.ToString());
-        return endPress;
-    }
-    */
 
 }
