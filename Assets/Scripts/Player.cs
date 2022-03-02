@@ -64,22 +64,24 @@ public class Player : MonoBehaviour
             Mathf.Clamp(transform.position.y, minY, maxY)
         );
 
-        if (Input.GetKeyDown(KeyCode.Space) && (Time.time > allowFire)) { 
-            {
+        if (Input.GetKeyDown(KeyCode.Space) && (Time.time > allowFire)) {
+            float timePressed = Time.time;
+            Debug.Log("Tiempo presionando tecla" + timePressed.ToString());
                 instanceBullet = Instantiate(bullet, transform.position, transform.rotation);
                 allowFire = Time.time + fireRate;
+                if (instanceBullet.GetComponent<Bullet>().GetSpecialShot() == true)
+                {
+                    instanceBullet.transform.localScale = new Vector2(2, 2);
+                    speed = 0.5f * speed;
+                }
+        } 
+
+        if (GameObject.FindObjectOfType<Bullet>() != null)
+        {
+            if (instanceBullet.GetComponent<Bullet>().GetHasBeenHit() == true && instanceBullet != null) {
+                Destroy(instanceBullet);
             }
         }
-
-        if (instanceBullet.GetComponent<Bullet>().GetHasBeenHit() == true)
-        {
-            DestroyBullet();
-        }
-    }
-
-    private void DestroyBullet()
-    {
-        Destroy(instanceBullet);
     }
 
 }

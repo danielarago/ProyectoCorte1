@@ -19,7 +19,7 @@ public class Bullet : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter2D(Collision2D collision){
+    public void OnCollisionEnter2D(Collision2D collision){
         GameObject collidedObject = collision.gameObject;
         if (specialShot == false)
         {
