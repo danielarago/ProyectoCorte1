@@ -112,7 +112,6 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.M))
         {
             specialShot = !specialShot;
-            Debug.Log("Shot has been changed");
         }
     }
 

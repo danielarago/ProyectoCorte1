@@ -49,16 +49,9 @@ public class Animal : MonoBehaviour
            Mathf.Clamp(transform.position.y, minY, maxY)
        );
 
-        if (transform.position.x == maxX)
+        if (transform.position.x == maxX || transform.position.x == minX)
         {
             speed = -speed;
-            Debug.Log("Llegamos al final");
-        }
-
-        if (transform.position.x == minX)
-        {
-            speed = -speed;
-            Debug.Log("Estamos en el principio");
         }
         
     }
