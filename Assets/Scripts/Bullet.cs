@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private bool hasBeenHit=false;
+    private bool hasBeenHit = false;
+    private bool specialShot = false;
 
     // Start is called before the first frame update
     void Start()
@@ -20,21 +21,50 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision){
         GameObject collidedObject = collision.gameObject;
-        if (collision.gameObject.tag == "Enemy") {
-            collidedObject.GetComponent<Animal>().TakeNormalShot();
-            if (collidedObject.GetComponent<Animal>().GetLife() == 0)
+        if (specialShot == false)
+        {
+            if (collision.gameObject.tag == "Enemy")
             {
-                Destroy(collidedObject);
+                collidedObject.GetComponent<Animal>().TakeNormalShot();
+                if (collidedObject.GetComponent<Animal>().GetLife() == 0)
+                {
+                    Destroy(collidedObject);
+                }
+            }
+            else
+            {
+                hasBeenHit = true;
             }
         }
-        else
+        else if (specialShot == true)
         {
-            hasBeenHit = true;
+            if (collision.gameObject.tag == "Enemy")
+            {
+                Destroy(collidedObject);
+                hasBeenHit = true;
+            }
+            else
+            {
+                hasBeenHit = true;
+            }
         }
     }
 
     public bool GetHasBeenHit()
     {
         return this.hasBeenHit;
+    }
+
+    public void ChangeShot()
+    {
+        if (Input.GetKeyDown(KeyCode.RightAlt))
+        {
+            specialShot = !specialShot;
+        }
+    }
+
+    public bool GetSpecialShot()
+    {
+        return specialShot;
     }
 }
