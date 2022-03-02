@@ -18,6 +18,9 @@ public class SpecialBullet : MonoBehaviour
      
     }
 
+    /*
+    * Detecta colisión y elimina al animal si se detecta colisión con un enemigo.
+    */
     public void OnCollisionEnter2D(Collision2D collision)
     {
         GameObject collidedObject = collision.gameObject;

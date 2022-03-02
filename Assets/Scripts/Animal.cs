@@ -12,23 +12,18 @@ public class Animal : MonoBehaviour
 
     [SerializeField] float speed;
     [SerializeField] int life;
-    Vector3 targetPosition;
-    Vector3 towardsTarget;
-    float wanderRadius = 2f;
     
-    
-    void RecalculteTargetPosition ()
-    {
-        targetPosition = transform.position + Random.insideUnitSphere * wanderRadius;
-        targetPosition.y = 0;
-    }
+
 
     // Start is called before the first frame update
     void Start()
     {
-        RecalculteTargetPosition ();
 
         myBody = GetComponent<Rigidbody2D>();
+
+        /*
+        * Determina límites de la pantalla.
+        */
 
         Vector2 esqInfI = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
         minX = esqInfI.x;
@@ -44,11 +39,17 @@ public class Animal : MonoBehaviour
     void Update()
     {
 
+        /*
+        * No permite que el animal salga de la pantalla.
+        */
         transform.position = new Vector2(
            Mathf.Clamp(transform.position.x, minX, maxX),
            Mathf.Clamp(transform.position.y, minY, maxY)
        );
 
+        /*
+        * Cambia el signo de la velocidad al alcanzar los límites laterales de la pantalla.
+        */
         if (transform.position.x == maxX || transform.position.x == minX)
         {
             speed = -speed;
@@ -69,7 +70,9 @@ public class Animal : MonoBehaviour
         
     }
 
-
+    /*
+    * Resta un punto de vida al ser llamado por bullet cuando el animal es disparado.
+    */
     public void TakeNormalShot()
     {
         life--;

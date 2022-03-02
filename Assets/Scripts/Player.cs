@@ -66,6 +66,9 @@ public class Player : MonoBehaviour
             Mathf.Clamp(transform.position.y, minY, maxY)
         );
 
+        /*
+         * Verifica que exista una bala en escena y si existe y ya ha estado en una colisión, la elimina.
+         */
         if (GameObject.FindObjectOfType<Bullet>() != null)
         {
             if ((instanceBullet != null) && (instanceBullet.GetComponent<Bullet>().GetHasBeenHit() == true))
@@ -74,6 +77,10 @@ public class Player : MonoBehaviour
             }
         }
 
+
+        /*
+         * Verifica que exista una bala especial en escena y si existe y ya ha estado en una colisión, la elimina.
+         */
         if (GameObject.FindObjectOfType<SpecialBullet>() != null)
         {
             if ((instanceSpecialBullet != null) && (instanceSpecialBullet.GetComponent<SpecialBullet>().GetHasBeenHit() == true))
@@ -82,6 +89,10 @@ public class Player : MonoBehaviour
             }
         }
 
+        /*
+         * Contador del tiempo de presión de la tecla espaciadora, utilizado para disparo especial. 
+         * Al presionar registra el tiempo y al soltar resta el tiempo con el registro previo para sacar el tiempo de presión.
+         */
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -91,9 +102,15 @@ public class Player : MonoBehaviour
         if ((Input.GetKeyUp(KeyCode.Space)))
         {
             endPress = Time.time - startPress;
-            Debug.Log("Tiempo" + endPress.ToString());
         }
 
+        /*
+         * Disparo. 
+         * El disparo normal se da al presionar espacio y una vez haya pasado el tiempo permitido de disparo, fireRate 
+         * e instancia una bala normal. 
+         * El disparo especial se da cuando el tiempo de presión es mayor al tiempo establecido para sostener la tecla
+         * de espacio, timeForSpecialShot, e isntancia una bala especial.
+         */
         if (specialShot == false)
         {
             if (Input.GetKeyDown(KeyCode.Space) && (Time.time > allowFire))
@@ -109,6 +126,9 @@ public class Player : MonoBehaviour
       
         }
 
+        /*
+         * Cambio de tipo de disparo con la tecla M, niega el valor actual de la variable booleana del disparo especial.
+         */
         if (Input.GetKeyDown(KeyCode.M))
         {
             specialShot = !specialShot;

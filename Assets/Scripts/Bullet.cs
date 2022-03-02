@@ -19,6 +19,9 @@ public class Bullet : MonoBehaviour
 
     }
 
+    /*
+    * Detecta colisión y le resta un punto de vida a animal si se detecta colisión con un enemigo.
+    */
     public void OnCollisionEnter2D(Collision2D collision){
         GameObject collidedObject = collision.gameObject;
         hasBeenHit = true;
