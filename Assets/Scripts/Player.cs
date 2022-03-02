@@ -37,10 +37,6 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*if(Input.GetKey(KeyCode.RightArrow))
-            transform.Translate(new Vector2(0.1f, 0));
-        */
-
         /* 
         Get Axis es de acuerdo con Project Settings > Input Manager, da valores entre -1 y 1 
         Dos otros factores en el el Input Manager son gravity y sensitivity, gravity es la demora
@@ -70,6 +66,23 @@ public class Player : MonoBehaviour
             Mathf.Clamp(transform.position.y, minY, maxY)
         );
 
+        if (GameObject.FindObjectOfType<Bullet>() != null)
+        {
+            if ((instanceBullet != null) && (instanceBullet.GetComponent<Bullet>().GetHasBeenHit() == true))
+            {
+                Destroy(instanceBullet);
+            }
+        }
+
+        if (GameObject.FindObjectOfType<SpecialBullet>() != null)
+        {
+            if ((instanceSpecialBullet != null) && (instanceSpecialBullet.GetComponent<SpecialBullet>().GetHasBeenHit() == true))
+            {
+                Destroy(instanceSpecialBullet);
+            }
+        }
+
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             startPress = Time.time;
@@ -94,22 +107,6 @@ public class Player : MonoBehaviour
                 instanceSpecialBullet = Instantiate(specialBullet, transform.position, transform.rotation);
             }
       
-        }
-
-        if (GameObject.FindObjectOfType<Bullet>() != null)
-        {
-            if ((instanceBullet != null) && (instanceBullet.GetComponent<Bullet>().GetHasBeenHit() == true))
-            {
-                Destroy(instanceBullet);
-            }
-        }
-
-        if (GameObject.FindObjectOfType<SpecialBullet>() != null)
-        {
-            if ((instanceSpecialBullet != null) && (instanceSpecialBullet.GetComponent<SpecialBullet>().GetHasBeenHit() == true))
-            {
-                Destroy(instanceSpecialBullet);
-            }
         }
 
         if (Input.GetKeyDown(KeyCode.M))

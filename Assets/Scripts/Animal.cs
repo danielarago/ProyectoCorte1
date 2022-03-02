@@ -8,7 +8,7 @@ public class Animal : MonoBehaviour
 {
     // Recuperamos el rigidbody del animal.
     Rigidbody2D myBody;
-    float minX, maxX, maxY, minY;
+    float minX, maxX, minY, maxY;
 
     [SerializeField] float speed;
     [SerializeField] int life;
@@ -30,11 +30,11 @@ public class Animal : MonoBehaviour
 
         myBody = GetComponent<Rigidbody2D>();
 
-        Vector2 esqInfI = Camera.main.ViewportToWorldPoint(new Vector3(0, 0));
+        Vector2 esqInfI = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
         minX = esqInfI.x;
         minY = esqInfI.y;
 
-        Vector2 esqSupD = Camera.main.ViewportToWorldPoint(new Vector3(1, 1));
+        Vector2 esqSupD = Camera.main.ViewportToWorldPoint(new Vector2(1, 1));
         maxX = esqSupD.x;
         maxY = esqSupD.y;
 
@@ -44,17 +44,22 @@ public class Animal : MonoBehaviour
     void Update()
     {
 
-        transform.position = new Vector3(
-               Mathf.Clamp(transform.position.x, minX, maxX),
-               Mathf.Clamp(transform.position.y, minY, maxY)
-           );
+        transform.position = new Vector2(
+           Mathf.Clamp(transform.position.x, minX, maxX),
+           Mathf.Clamp(transform.position.y, minY, maxY)
+       );
 
-        towardsTarget = targetPosition - transform.position;
-        if (towardsTarget.magnitude < 2f)
-            RecalculteTargetPosition();
+        if (transform.position.x == maxX)
+        {
+            speed = -speed;
+            Debug.Log("Llegamos al final");
+        }
 
-        transform.position += towardsTarget.normalized * speed * Time.deltaTime;
-
+        if (transform.position.x == minX)
+        {
+            speed = -speed;
+            Debug.Log("Estamos en el principio");
+        }
         
     }
 
