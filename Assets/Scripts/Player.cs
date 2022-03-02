@@ -13,6 +13,10 @@ public class Player : MonoBehaviour
     private GameObject instanceBullet;
     private bool specialShot = false;
     [SerializeField] GameObject specialBullet;
+    private GameObject instanceSpecialBullet;
+    private float startPress;
+    private float endPress;
+    private float timeForSpecialShot = 3.0f;
 
 
     // Start is called before the first frame update
@@ -75,9 +79,13 @@ public class Player : MonoBehaviour
             }
         } else if (specialShot == true)
         {
-            if (Input.GetKeyDown(KeyCode.Space){
-                instanceBullet = Instantiate(specialBullet);
-                instanceBullet.transform.localScale = new Vector2(2, 2);
+            while (Input.GetKey(KeyCode.Space))
+            {
+                endPress = 0 + Time.deltaTime;
+                Debug.Log("Tiempo presionado de tecla" + endPress.ToString());
+            }
+            if (Input.GetKeyDown(KeyCode.Space) && endPress > timeForSpecialShot) {
+                instanceSpecialBullet = Instantiate(specialBullet, transform.position, transform.rotation);
             }
       
         }
@@ -90,11 +98,37 @@ public class Player : MonoBehaviour
             }
         }
 
+        if (GameObject.FindObjectOfType<SpecialBullet>() != null)
+        {
+            if ((instanceSpecialBullet != null) && (instanceSpecialBullet.GetComponent<SpecialBullet>().GetHasBeenHit() == true))
+            {
+                Destroy(instanceSpecialBullet);
+            }
+        }
+
         if (Input.GetKeyDown(KeyCode.M))
         {
             specialShot = !specialShot;
             Debug.Log("Shot has been changed");
         }
     }
+
+    /* private float timeKeyPress()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            startPress = Time.time;
+        }
+
+        if ((Input.GetKeyUp(KeyCode.Space)))
+        {
+            endPress = Time.time - startPress;
+        }
+        
+
+        Debug.Log("Tiempo presionado de tecla" + endPress.ToString());
+        return endPress;
+    }
+    */
 
 }

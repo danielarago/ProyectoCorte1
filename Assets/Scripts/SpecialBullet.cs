@@ -21,14 +21,15 @@ public class SpecialBullet : MonoBehaviour
     public void OnCollisionEnter2D(Collision2D collision)
     {
         GameObject collidedObject = collision.gameObject;
+        hasBeenHit = true;
         if (collision.gameObject.tag == "Enemy")
         {
             Destroy(collidedObject);
-            hasBeenHit = true;
         }
-        else
-        {
-            hasBeenHit = true;
-        }
+    }
+
+    public bool GetHasBeenHit()
+    {
+        return this.hasBeenHit;
     }
 }

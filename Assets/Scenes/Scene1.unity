@@ -2246,6 +2246,7 @@ MonoBehaviour:
   speed: 27
   bullet: {fileID: 8970461129129218212, guid: 5c12a120e9e3b324dae6382185a13830, type: 3}
   fireRate: 0.5
+  specialBullet: {fileID: 8399956311599107045, guid: c00788fbb2715f24ba32ce6685617bb8, type: 3}
 --- !u!1 &2086044388
 GameObject:
   m_ObjectHideFlags: 0

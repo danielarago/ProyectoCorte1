@@ -21,19 +21,15 @@ public class Bullet : MonoBehaviour
 
     public void OnCollisionEnter2D(Collision2D collision){
         GameObject collidedObject = collision.gameObject;
-            if (collision.gameObject.tag == "Enemy")
+        hasBeenHit = true;
+        if (collision.gameObject.tag == "Enemy")
+         {
+            collidedObject.GetComponent<Animal>().TakeNormalShot();
+            if (collidedObject.GetComponent<Animal>().GetLife() == 0)
             {
-                collidedObject.GetComponent<Animal>().TakeNormalShot();
-                if (collidedObject.GetComponent<Animal>().GetLife() == 0)
-                {
-                    Destroy(collidedObject);
-                }
+                Destroy(collidedObject);
             }
-            else
-            {
-                hasBeenHit = true;
-            }
-      
+         }
     }
 
     public bool GetHasBeenHit()
